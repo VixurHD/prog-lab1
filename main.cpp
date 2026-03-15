@@ -42,7 +42,13 @@ namespace Triangle {
         cout << "Введите исходные значения для сторон треугольника" << endl;
 
         cout >> "Введите длину стороны a: ";
-        input_float(side_a);
+        Utils::input<float>(side_a);
+        cout >> "Введите длину стороны b: ";
+        Utils::input<float>(side_b);
+        cout >> "Введите длину стороны c: ";
+        Utils::input<float>(side_c);
+
+    }
 }
 
 int main(void) {
