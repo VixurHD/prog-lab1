@@ -37,16 +37,67 @@ namespace Triangle {
     float area() {};
     float is_isoscels() {};
 
+    bool is_real_triangle() {
+        if ((side_a < side_b + side_c) &&
+            (side_b < side_c + side_a) &&
+            (side_c < side_a + side_b)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    void set_sides() {
+        while (true) {
+            cout << "Введите длину стороны a: ";
+            Utils::input<float>(side_a, "введите число");
+            cout << "Введите длину стороны b: ";
+            Utils::input<float>(side_b, "введите число");
+            cout << "Введите длину стороны c: ";
+            Utils::input<float>(side_c, "введите число");
+
+            if (!is_real_triangle()) {
+                cout << "Таковой треугольник не возможен, введите значения заново";
+            } else {
+                break;
+            }
+        }
+    }
+
     void select() {
+        char exit;
+        while (exit == 0) {
+            char choice;
+            cout << "Что вы хотите вычислить?" << endl;
+            cout << "1 — Перметр" << endl;
+            cout << "2 — Площадь" << endl;
+            cout << "3 — Проверить равнобедренность" << endl;
+            cout << "0 — Выход" << endl;
+            cout << "> ";
+
+            switch(choice) {
+                case '1':
+                    perimeter();
+                    break;
+                case '2':
+                    area();
+                    break;
+                case '3':
+                    is_isoscels();
+                    break;
+                case '0':
+                    exit = 1;
+                    break;
+                default:
+                    cout << "iПожалуйста введите число от 1 до 3 или используйте 0 для выхода" << endl;
+                    break;
+            }
+        }
+    }
+
+    void start() {
         cout << "Вы выбрали треугольник" << endl;
         cout << "Введите исходные значения для сторон треугольника" << endl;
-
-        cout >> "Введите длину стороны a: ";
-        Utils::input<float>(side_a);
-        cout >> "Введите длину стороны b: ";
-        Utils::input<float>(side_b);
-        cout >> "Введите длину стороны c: ";
-        Utils::input<float>(side_c);
+        set_sides();
 
     }
 }
