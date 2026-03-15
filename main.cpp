@@ -12,9 +12,9 @@ int main(void) {
         cout << "3 — Трапеция"       << endl;
         cout << "4 — Круг"           << endl;
         cout << "0 — Выйти"          << endl;
-        cout << "\033[5A";cout << "\033[17C"; //Смещение коретки
+        cout << "\033[6A";cout << "\033[17C"; //Смещение коретки
         cin  >> choice;
-
+        cout << "\033[A";
         switch(choice) {
             case 'a':
             case '1':
@@ -35,7 +35,7 @@ int main(void) {
             case 'q':
             case '0':
                 exit = 1;
-                cout << "Выход..." << endl;
+                cout << "Выход...       " << endl;
                 break;
             default:
                 cout << "Пожалуйста введите число от 1 до 4 (или a,b,c,d) или используйте 0 для выхода" << endl;
