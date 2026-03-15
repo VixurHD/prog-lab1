@@ -28,6 +28,91 @@ namespace Utils {
         }
     }
 }
+namespace Rectangle {
+    // Длины сторон прямоугольника
+    float side_a;
+    float side_b;
+    // Вычисляем периметр прямоугольника
+    float perimeter() {
+        return 2.0f * (side_a + side_b);
+    }
+    // Вычисляем площадь прямоугольника
+    float area() {
+        return side_a * side_b;
+    }
+    // Вычисляем диагональ прямоугольника 
+    float diagonal() {
+        return sqrt(side_a * side_a + side_b * side_b);
+    }
+    /*
+    * Проверка существует ли прямоугольник с такими значениями
+    * При неверном вводе (отрицательные или нулевые значения) просит повторить
+    */ 
+
+    bool is_real_rectangle() {
+        if (side_a > 0 && side_b > 0)
+        {
+            return 1;
+        }
+        return 0;
+
+      }
+     
+    void set_sides() {
+        while (true) {
+            cout << "Введите длину стороны a: ";
+            Utils::input<float>(side_a, "введите число");
+            cout << "Введите длину стороны b: ";
+            Utils::input<float>(side_b, "введите число");
+
+            if (!is_real_rectangle()) {
+                cout << "Такой прямоугольник не возможен, введите положительные значения" << endl;
+            }
+            else {
+                break; // Верные значения - выходим из цикла
+            }
+        }
+  }
+    // Меню выбора действии для прямоугольника
+    void select() {
+        char exit = 0;
+        while (exit == 0) {
+            char choice;
+            cout << "Что вы хотите вычислить?" << endl;
+            cout << "1 — Периметр" << endl;
+            cout << "2 — Площадь" << endl;
+            cout << "3 — Диагональ" << endl;
+            cout << "0 — Выход" << endl;
+            cout << "> ";
+            Utils::input<char>(choice, "введите число");
+            switch (choice) {
+            case '1':
+                cout << "P = " << perimeter() << endl;
+                break;
+            case '2':
+                cout << "S = " << area() << endl;
+                break;
+            case '3':
+                cout << "D = " << diagonal() << endl;
+                break;
+            case '0':
+                exit = 1;
+                break;
+            default:
+                cout << "Пожалуйста введите число от 1 до 3 или используйте 0 для выхода" << endl;
+                break;
+            }
+        }
+    }
+    // Точка входа в модуль прямоугольника, запрашивает исходные значения для сторон прямоугольника
+    void start() {
+        cout << "Вы выбрали прямоугольник" << endl;
+        cout << "Введите исходные значения для сторон прямоугольника" << endl;
+        set_sides();
+        select();
+    }
+}
+
 
 namespace Circle {
     float radius;
@@ -196,7 +281,7 @@ int main(void) {
         switch(choice) {
             case 'a':
             case '1':
-                // TODO: вызов функции Айхаана Прямоугольник
+                Rectangle::start();
                 break;
             case 'b':
             case '2':
