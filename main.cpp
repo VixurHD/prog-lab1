@@ -3,7 +3,16 @@
 using namespace std;
 
 namespace Utils {
-    void input_float(float &value) {
+    template<typename T>
+    void input(T &value, const string &error_message) {
+        /*
+         * Функция для безопасного ввода с автоматическим выводом ошибки с просьбой написать снова
+         * T &value ссылка на переменную в которую записывается ввод
+         * const string &error_message сообщение выводимое пользователю при ошибке (ожидается текст вроде "Введите число")
+         * Использование:
+         * cout << "Введите номер: ";
+         * Utils::input<int>(var, "text");
+         */
         while (true) {
             cin >> value;
             if (cin.good()) {
@@ -11,7 +20,7 @@ namespace Utils {
             }
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Ошибка: введите число: ";
+            cout << "Ошибка: " << error_message << ": ";
         }
     }
 }
