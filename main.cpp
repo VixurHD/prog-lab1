@@ -1,5 +1,6 @@
 #include <iostream>
 #include <limits>
+#include <cmath>
 
 using namespace std;
 
@@ -33,9 +34,20 @@ namespace Triangle {
     float side_b;
     float side_c;
 
-    float perimeter() {};
-    float area() {};
-    float is_isoscels() {};
+    float perimeter() {
+        return (side_a + side_b + side_c);
+    }
+
+    float area() {
+        float halfmeter = perimeter() / 2.0f;
+        return (sqrt(halfmeter*(halfmeter-side_a)*(halfmeter-side_b)*(halfmeter-side_c)));
+    }
+
+    float is_isoscels() {
+        if ((side_a == side_b) || (side_a == side_c) || (side_b == side_c)) {
+            return 1;
+        }   return 0;
+    }
 
     bool is_real_triangle() {
         if ((side_a < side_b + side_c) &&
@@ -64,7 +76,7 @@ namespace Triangle {
     }
 
     void select() {
-        char exit;
+        char exit = 0;
         while (exit == 0) {
             char choice;
             cout << "Что вы хотите вычислить?" << endl;
@@ -73,16 +85,20 @@ namespace Triangle {
             cout << "3 — Проверить равнобедренность" << endl;
             cout << "0 — Выход" << endl;
             cout << "> ";
-
+            Utils::input<char>(choice, "введите число");
             switch(choice) {
                 case '1':
-                    perimeter();
+                    cout << "P = " << perimeter() << endl;
                     break;
                 case '2':
-                    area();
+                    cout << "S = " << area() << endl;
                     break;
                 case '3':
-                    is_isoscels();
+                    if (is_isoscels()) {
+                        cout << "Треугольник равнобедренный" << endl;
+                    } else {
+                        cout << "Треугольник не равнобедренный" << endl;
+                    }
                     break;
                 case '0':
                     exit = 1;
@@ -98,13 +114,13 @@ namespace Triangle {
         cout << "Вы выбрали треугольник" << endl;
         cout << "Введите исходные значения для сторон треугольника" << endl;
         set_sides();
-
+        select();
     }
 }
 
 int main(void) {
     char choice;
-    char exit;
+    char exit = 0;
     while (exit == 0) {
         cout << "Выберите фигуру: "  << endl;
         cout << "1 — Прямоугольник"  << endl;
