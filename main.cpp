@@ -64,6 +64,8 @@ namespace Circle {
                         Utils::input<float>(angle, "введите число");
                         if ((angle <= 0.0f) || (angle >= 360.0f)) {
                             cout << "укажите значение от 0 до 360" << endl;
+                        } else {
+                            break;
                         }
                     }
                     cout << "S_сектора = " << area(angle) << endl;
