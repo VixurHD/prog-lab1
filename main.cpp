@@ -36,7 +36,7 @@ namespace Circle {
         return (2*PI*radius);
     }
     float area(float angle) {
-        return (PI*radius*radius*(angle/angle));
+        return (PI*radius*radius*(angle/360.0f));
     }
 
     void menu() {
@@ -62,7 +62,7 @@ namespace Circle {
                     cout << "Введите угол сектора: ";
                     while (true) {
                         Utils::input<float>(angle, "введите число");
-                        if ((angle <= 0.0f) || (angle >= 360.0f)) {
+                        if ((angle < 0.0f) || (angle > 360.0f)) {
                             cout << "укажите значение от 0 до 360" << endl;
                         } else {
                             break;
