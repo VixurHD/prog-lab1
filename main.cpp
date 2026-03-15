@@ -2,6 +2,20 @@
 
 using namespace std;
 
+namespace Utils {
+    void input_float(float &value) {
+        while (true) {
+            cin >> value;
+            if (cin.good()) {
+                break;
+            }
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Ошибка: введите число: ";
+        }
+    }
+}
+
 int main(void) {
     char choice;
     char exit;
