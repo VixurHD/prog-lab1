@@ -27,7 +27,62 @@ namespace Utils {
     }
 }
 
+namespace Circle {
+    float radius;
 
+    float len() {}
+    float area() {}
+    float sector_area(float angle) {}
+
+    void menu() {
+        char exit = 0;
+        while (exit == 0) {
+            char choice;
+            cout << "Что вы хотите вычислить?" << endl;
+            cout << "1 — Длина окружности" << endl;
+            cout << "2 — Площадь окружности" << endl;
+            cout << "3 — Площадь сектора" << endl;
+            cout << "0 — Выход" << endl;
+            cout << "> ";
+            Utils::input<char>(choice, "введите число");
+            switch(choice) {
+                case '1':
+                    cout << "l = " << len() << endl;
+                    break;
+                case '2':
+                    cout << "S_окружности = " << area(360.0f) << endl;
+                    break;
+                case '3':
+                    float angle;
+                    cout << "Введите угол сектора: ";
+                    while (true) {
+                        Utils::input<float>(angle, "введите число");
+                        if ((angle <= 0.0f) || (angle >= 360.0f)) {
+                            cout << "укажите значение от 0 до 360" << endl;
+                        }
+                    }
+                    cout << "S_сектора = " << area(angle) << endl;
+                    break;
+                case '0':
+                    exit = 1;
+                    break;
+                default:
+                    cout << "Пожалуйста введите число от 1 до 3 или используйте 0 для выхода" << endl;
+                    break;
+            }
+        }
+    }
+
+
+    void start() {
+        cout << "Вы выбрали круг" << endl;
+        cout << "Введите начальные параметры для круга:" << endl;
+        cout << "Введите радиус: " << endl;
+        Utils::input<float>(radius, "введите число с плавающей точкой");
+        menu();
+
+    }
+}
 
 namespace Triangle {
     float side_a;
