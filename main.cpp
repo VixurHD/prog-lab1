@@ -2,6 +2,8 @@
 #include <limits>
 #include <cmath>
 
+#define PI 3.14159265
+
 using namespace std;
 
 namespace Utils {
@@ -30,9 +32,12 @@ namespace Utils {
 namespace Circle {
     float radius;
 
-    float len() {}
-    float area() {}
-    float sector_area(float angle) {}
+    float len() {
+        return (2*PI*radius);
+    }
+    float area(float angle) {
+        return (PI*radius*radius*(angle/angle));
+    }
 
     void menu() {
         char exit = 0;
@@ -201,7 +206,7 @@ int main(void) {
                 break;
             case 'd':
             case '4':
-                // TODO: вызов функции Тимофея Круг
+                Circle::start();
                 break;
             case 'q':
             case '0':
