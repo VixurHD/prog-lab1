@@ -43,7 +43,7 @@ namespace Triangle {
         return (sqrt(halfmeter*(halfmeter-side_a)*(halfmeter-side_b)*(halfmeter-side_c)));
     }
 
-    float is_isoscels() {
+    bool is_isoscels() {
         if ((side_a == side_b) || (side_a == side_c) || (side_b == side_c)) {
             return 1;
         }   return 0;
@@ -68,7 +68,7 @@ namespace Triangle {
             Utils::input<float>(side_c, "введите число");
 
             if (!is_real_triangle()) {
-                cout << "Таковой треугольник не возможен, введите значения заново";
+                cout << "Таковой треугольник не возможен, введите значения заново" << endl;
             } else {
                 break;
             }
