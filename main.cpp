@@ -122,7 +122,7 @@ int main(void) {
                 break;
             case 'b':
             case '2':
-                // TODO: вызов функции Дениса Треугольник
+                Triangle::start();
                 break;
             case 'c':
             case '3':
