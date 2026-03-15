@@ -26,6 +26,25 @@ namespace Utils {
     }
 }
 
+
+
+namespace Triangle {
+    float side_a;
+    float side_b;
+    float side_c;
+
+    float perimeter() {};
+    float area() {};
+    float is_isoscels() {};
+
+    void select() {
+        cout << "Вы выбрали треугольник" << endl;
+        cout << "Введите исходные значения для сторон треугольника" << endl;
+
+        cout >> "Введите длину стороны a: ";
+        input_float(side_a);
+}
+
 int main(void) {
     char choice;
     char exit;
