@@ -6,4 +6,4 @@ Lab. work 1. 2nd s.
 | Денис (VixurHD) | Треугольник | `feature/triangle` |
 | Айхаан (kodoval) | Прямоугольник | `feature/...` |
 | Дима (...) | Трапеция | `feature/...` |
-| Тима (ZippiSt)| Окружность | `feature/...` |
+| Тима (ZippiSt)| Окружность | `feature/circle` |
