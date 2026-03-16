@@ -5,6 +5,120 @@
 #define PI 3.14159265
 
 using namespace std;
+// comment
+namespace Utils {
+    template<typename T>
+    void input(T &value, const string &error_message) {
+        /*
+         * Функция для безопасного ввода с автоматическим выводом ошибки с просьбой написать снова
+         * T &value ссылка на переменную в которую записывается ввод
+         * const string &error_message сообщение выводимое пользователю при ошибке (ожидается текст вроде "Введите число")
+         * Использование:
+         * cout << "Введите номер: ";
+         * Utils::input<int>(var, "text");
+         */
+        while (true) {
+            cin >> value;
+            if (cin.good()) {
+                break;
+            }
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Ошибка: " << error_message << ": ";
+        }
+    }
+}
+
+
+
+namespace Triangle {
+    float side_a;
+    float side_b;
+    float side_c;
+
+    float perimeter() {
+        return (side_a + side_b + side_c);
+    }
+
+    float area() {
+        float halfmeter = perimeter() / 2.0f;
+        return (sqrt(halfmeter*(halfmeter-side_a)*(halfmeter-side_b)*(halfmeter-side_c)));
+    }
+
+    bool is_isoscels() {
+        if ((side_a == side_b) || (side_a == side_c) || (side_b == side_c)) {
+            return 1;
+        }   return 0;
+    }
+
+    bool is_real_triangle() {
+        if ((side_a < side_b + side_c) &&
+            (side_b < side_c + side_a) &&
+            (side_c < side_a + side_b)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    void set_sides() {
+        while (true) {
+            cout << "Введите длину стороны a: ";
+            Utils::input<float>(side_a, "введите число");
+            cout << "Введите длину стороны b: ";
+            Utils::input<float>(side_b, "введите число");
+            cout << "Введите длину стороны c: ";
+            Utils::input<float>(side_c, "введите число");
+
+            if (!is_real_triangle()) {
+                cout << "Таковой треугольник не возможен, введите значения заново" << endl;
+            } else {
+                break;
+            }
+        }
+    }
+
+    void select() {
+        char exit = 0;
+        while (exit == 0) {
+            char choice;
+            cout << "Что вы хотите вычислить?" << endl;
+            cout << "1 — Перметр" << endl;
+            cout << "2 — Площадь" << endl;
+            cout << "3 — Проверить равнобедренность" << endl;
+            cout << "0 — Выход" << endl;
+            cout << "> ";
+            Utils::input<char>(choice, "введите число");
+            switch(choice) {
+                case '1':
+                    cout << "P = " << perimeter() << endl;
+                    break;
+                case '2':
+                    cout << "S = " << area() << endl;
+                    break;
+                case '3':
+                    if (is_isoscels()) {
+                        cout << "Треугольник равнобедренный" << endl;
+                    } else {
+                        cout << "Треугольник не равнобедренный" << endl;
+                    }
+                    break;
+                case '0':
+                    exit = 1;
+                    break;
+                default:
+                    cout << "iПожалуйста введите число от 1 до 3 или используйте 0 для выхода" << endl;
+                    break;
+            }
+        }
+    }
+
+    void start() {
+        cout << "Вы выбрали треугольник" << endl;
+        cout << "Введите исходные значения для сторон треугольника" << endl;
+        set_sides();
+        select();
+    }
+}
 
 namespace Utils {
     template<typename T>
