@@ -3,7 +3,7 @@
 #include <cmath>
 
 using namespace std;
-
+// comment
 namespace Utils {
     template<typename T>
     void input(T &value, const string &error_message) {
