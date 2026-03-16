@@ -28,6 +28,124 @@ namespace Utils {
         }
     }
 }
+
+namespace Trapezoid {
+    // Основания и боковые стороны трапеции
+    float base_a;
+    float base_b;
+    float side_c;
+    float side_d;
+    float height;
+
+    // Вычисляем периметр трапеции
+    float perimeter() {
+        return base_a + base_b + side_c + side_d;
+    }
+
+    // Вычисляем площадь трапеции
+    float area() {
+        return ((base_a + base_b) * height) / 2.0f;
+    }
+
+    // Вычисляем среднюю линию трапеции
+    float midline() {
+        return (base_a + base_b) / 2.0f;
+    }
+
+    /*
+    * Проверка существует ли трапеция с такими значениями
+    * При неверном вводе (отрицательные, нулевые значения или невозможная трапеция) просит повторить
+    */
+    bool is_real_trapezoid() {
+        if (base_a > 0 && base_b > 0 && side_c > 0 && side_d > 0 && height > 0)
+        {
+            // Проверяем, что высота не больше боковых сторон
+            if (height <= side_c && height <= side_d) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    // Проверка на равнобедренность
+    bool is_isosceles() {
+        return (side_c == side_d);
+    }
+
+    void set_sides() {
+        while (true) {
+            cout << "Введите длину основания a: ";
+            Utils::input<float>(base_a, "введите число");
+            cout << "Введите длину основания b: ";
+            Utils::input<float>(base_b, "введите число");
+            cout << "Введите длину боковой стороны c: ";
+            Utils::input<float>(side_c, "введите число");
+            cout << "Введите длину боковой стороны d: ";
+            Utils::input<float>(side_d, "введите число");
+            cout << "Введите высоту h: ";
+            Utils::input<float>(height, "введите число");
+
+            if (!is_real_trapezoid()) {
+                cout << "Такая трапеция не возможна, введите положительные значения" << endl;
+                cout << "(высота не должна быть больше боковых сторон)" << endl;
+            }
+            else {
+                break; // Верные значения - выходим из цикла
+            }
+        }
+    }
+
+    // Меню выбора действий для трапеции
+    void select() {
+        char exit = 0;
+        while (exit == 0) {
+            char choice;
+            cout << "\nЧто вы хотите вычислить?" << endl;
+            cout << "1 — Периметр" << endl;
+            cout << "2 — Площадь" << endl;
+            cout << "3 — Средняя линия" << endl;
+            cout << "4 — Проверка на равнобедренность" << endl;
+            cout << "0 — Выход" << endl;
+            cout << "> ";
+            Utils::input<char>(choice, "введите число");
+
+            switch (choice) {
+            case '1':
+                cout << "P = " << perimeter() << endl;
+                break;
+            case '2':
+                cout << "S = " << area() << endl;
+                break;
+            case '3':
+                cout << "M = " << midline() << endl;
+                break;
+            case '4':
+                if (is_isosceles()) {
+                    cout << "Трапеция является равнобедренной" << endl;
+                }
+                else {
+                    cout << "Трапеция не является равнобедренной" << endl;
+                }
+                break;
+            case '0':
+                exit = 1;
+                break;
+            default:
+                cout << "Пожалуйста введите число от 1 до 4 или используйте 0 для выхода" << endl;
+                break;
+            }
+        }
+    }
+
+    // Точка входа в модуль трапеции, запрашивает исходные значения для оснований, сторон и высоты трапеции
+    void start() {
+        cout << "Вы выбрали трапецию" << endl;
+        cout << "Введите исходные значения для трапеции" << endl;
+        set_sides();
+        select();
+    }
+}
+
 namespace Rectangle {
     // Длины сторон прямоугольника
     float side_a;
