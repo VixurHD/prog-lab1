@@ -5,5 +5,5 @@ Lab. work 1. 2nd s.
 | ---|---|---|
 | Денис (VixurHD) | Треугольник | `feature/triangle` |
 | Айхаан (kodoval) | Прямоугольник | `feature/rectangle` |
-| Дима (...) | Трапеция | `feature/...` |
+| Дима (DomaCKBO3H9K) | Трапеция | `feature/trapezoid` |
 | Тима (ZippiSt)| Окружность | `feature/circle` |
