@@ -498,6 +498,8 @@ namespace Triangle {
 }
 
 int main(void) {
+    system("chcp 65001");
+
     char choice;
     char exit = 0;
     while (exit == 0) {
