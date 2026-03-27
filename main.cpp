@@ -1,4 +1,4 @@
-#include <iostream>
+.]#include <iostream>
 #include <limits>
 #include <cmath>
 
@@ -74,6 +74,7 @@ namespace Rectangle {
         }
   }
     // Меню выбора действии для прямоугольника
+    //комментариииии
     void select() {
         char exit = 0;
         while (exit == 0) {
@@ -121,7 +122,7 @@ namespace Circle {
         return (2*PI*radius);
     }
     float area(float angle) {
-        return (PI*radius*radius*(angle/360.0f));
+        return (PI*radius*radius*(angle/angle));
     }
 
     void menu() {
@@ -147,7 +148,7 @@ namespace Circle {
                     cout << "Введите угол сектора: ";
                     while (true) {
                         Utils::input<float>(angle, "введите число");
-                        if ((angle < 0.0f) || (angle > 360.0f)) {
+                        if ((angle <= 0.0f) || (angle >= 360.0f)) {
                             cout << "укажите значение от 0 до 360" << endl;
                         } else {
                             break;
@@ -266,6 +267,8 @@ namespace Triangle {
 }
 
 int main(void) {
+    system("chcp 65001");
+
     char choice;
     char exit = 0;
     while (exit == 0) {
