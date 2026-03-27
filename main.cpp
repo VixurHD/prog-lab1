@@ -1,4 +1,4 @@
-#include <iostream>
+.]#include <iostream>
 #include <limits>
 #include <cmath>
 
@@ -74,6 +74,7 @@ namespace Rectangle {
         }
   }
     // Меню выбора действии для прямоугольника
+    //комментариииии
     void select() {
         char exit = 0;
         while (exit == 0) {
