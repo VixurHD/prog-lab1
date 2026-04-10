@@ -397,7 +397,7 @@ namespace Circle {
             }
         }
     }
-//Z ecnfk
+//Z ecnfk_dopping
 //test123_337
     void start() {
         cout << "Вы выбрали круг" << endl;
