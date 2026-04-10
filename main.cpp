@@ -397,8 +397,8 @@ namespace Circle {
             }
         }
     }
-
-
+//Z ecnfk
+//test123_337
     void start() {
         cout << "Вы выбрали круг" << endl;
         cout << "Введите начальные параметры для круга:" << endl;
