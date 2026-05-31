@@ -166,19 +166,30 @@ namespace Trapezoid {
         return (base_a + base_b) / 2.0f;
     }
 
-    /*
-    * Проверка существует ли трапеция с такими значениями
-    * При неверном вводе (отрицательные, нулевые значения или невозможная трапеция) просит повторить
-    */
+    // Проверка существует ли трапеция с такими значениями
     bool is_real_trapezoid() {
-        if (base_a > 0 && base_b > 0 && side_c > 0 && side_d > 0 && height > 0)
-        {
-            // Проверяем, что высота не больше боковых сторон
-            if (height <= side_c && height <= side_d) {
-                return 1;
-            }
+        // Все стороны и высота должны быть положительными
+        if (base_a <= 0 || base_b <= 0 || side_c <= 0 || side_d <= 0 || height <= 0) {
+            return false;
         }
-        return 0;
+        
+        // Высота не должна быть больше боковых сторон
+        if (height > side_c || height > side_d) {
+            return false;
+        }
+        
+        // Разность оснований
+        float base_diff = (base_a > base_b) ? (base_a - base_b) : (base_b - base_a);
+        
+        // Проекции боковых сторон на основание
+        // По теореме Пифагора: projection = sqrt(side^2 - height^2)
+        float proj_c = sqrt(side_c * side_c - height * height);
+        float proj_d = sqrt(side_d * side_d - height * height);
+        
+        // Сумма проекций должна быть равна разности оснований
+        // С небольшой погрешностью для float
+        float sum_proj = proj_c + proj_d;
+        return (abs(sum_proj - base_diff) < 0.001f);
     }
 
     // Проверка на равнобедренность
@@ -200,11 +211,15 @@ namespace Trapezoid {
             Utils::input<float>(height, "введите число");
 
             if (!is_real_trapezoid()) {
-                cout << "Такая трапеция не возможна, введите положительные значения" << endl;
-                cout << "(высота не должна быть больше боковых сторон)" << endl;
+                cout << "Такая трапеция не существует!" << endl;
+                cout << "Проверьте условия:" << endl;
+                cout << "  - Все стороны и высота должны быть > 0" << endl;
+                cout << "  - Высота не должна быть больше боковых сторон" << endl;
+                cout << "  - Должно выполняться: |a-b| = sqrt(c^2-h^2) + sqrt(d^2-h^2)" << endl;
+                cout << "Повторите ввод..." << endl;
             }
             else {
-                break; // Верные значения - выходим из цикла
+                break;
             }
         }
     }
@@ -251,7 +266,7 @@ namespace Trapezoid {
         }
     }
 
-    // Точка входа в модуль трапеции, запрашивает исходные значения для оснований, сторон и высоты трапеции
+    // Точка входа в модуль трапеции
     void start() {
         cout << "Вы выбрали трапецию" << endl;
         cout << "Введите исходные значения для трапеции" << endl;
