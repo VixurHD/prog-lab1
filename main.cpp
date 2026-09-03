@@ -125,14 +125,20 @@ namespace Trapezoid {
     float base_b;
     float side_c;
     float side_d;
-    float height;
 
     float perimeter() {
         return base_a + base_b + side_c + side_d;
     }
 
+    float height() {
+        float m = fabs(base_a - base_b);
+        float s = (m + side_c + side_d) / 2.0f;
+        float triangle_area = sqrt(s * (s - m) * (s - side_c) * (s - side_d));
+        return (2.0f * triangle_area) / m;
+    }
+
     float area() {
-        return (base_a + base_b) * height / 2.0f;
+        return (base_a + base_b) * height() / 2.0f;
     }
 
     float midline() {
@@ -144,7 +150,7 @@ namespace Trapezoid {
     }
 
     bool is_real_trapezoid() {
-        if (base_a <= 0 || base_b <= 0 || side_c <= 0 || side_d <= 0 || height <= 0) {
+        if (base_a <= 0 || base_b <= 0 || side_c <= 0 || side_d <= 0) {
             return false;
         }
 
@@ -153,13 +159,11 @@ namespace Trapezoid {
             return false;
         }
 
-        if (height > side_c || height > side_d) {
+        if (!((m < side_c + side_d) && (side_c < m + side_d) && (side_d < m + side_c))) {
             return false;
         }
 
-        float proj_c = sqrt(side_c * side_c - height * height);
-        float proj_d = sqrt(side_d * side_d - height * height);
-        return fabs((proj_c + proj_d) - m) < 0.001f;
+        return true;
     }
 
     void set_sides() {
@@ -172,8 +176,6 @@ namespace Trapezoid {
             Utils::input<float>(side_c, "введите число");
             cout << "Введите длину боковой стороны d: ";
             Utils::input<float>(side_d, "введите число");
-            cout << "Введите высоту h: ";
-            Utils::input<float>(height, "введите число");
 
             if (!is_real_trapezoid()) {
                 cout << "Такой трапеции не существует, введите значения заново" << endl;
@@ -214,7 +216,7 @@ namespace Trapezoid {
                     }
                     break;
                 case '5':
-                    cout << "h = " << height << endl;
+                    cout << "h = " << height() << endl;
                     break;
                 case '0':
                     exit = 1;
@@ -246,14 +248,14 @@ namespace Rectangle {
     float area() {
         return side_a * side_b;
     }
-    // Вычисляем диагональ прямоугольника
+    // Вычисляем диагональ прямоугольника 
     float diagonal() {
         return sqrt(side_a * side_a + side_b * side_b);
     }
     /*
     * Проверка существует ли прямоугольник с такими значениями
     * При неверном вводе (отрицательные или нулевые значения) просит повторить
-    */
+    */ 
 
     bool is_real_rectangle() {
         if (side_a > 0 && side_b > 0)
@@ -263,7 +265,7 @@ namespace Rectangle {
         return 0;
 
       }
-
+     
     void set_sides() {
         while (true) {
             cout << "Введите длину стороны a: ";
