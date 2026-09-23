@@ -320,7 +320,7 @@ namespace Rectangle {
     }
 }
 
-//test12-new
+//test12
 namespace Circle {
     float radius;
 
@@ -328,7 +328,12 @@ namespace Circle {
         return (2*PI*radius);
     }
     float area(float angle) {
-        return (PI*radius*radius*(angle/angle));
+        return (PI*radius*radius*(angle/360.0f));   
+    }
+
+   
+    bool is_real_circle() {
+        return radius > 0;
     }
 
     void menu() {
@@ -371,13 +376,19 @@ namespace Circle {
             }
         }
     }
-    void start() {
+     void start() {
         cout << "Вы выбрали круг" << endl;
         cout << "Введите начальные параметры для круга:" << endl;
-        cout << "Введите радиус: " << endl;
-        Utils::input<float>(radius, "введите число с плавающей точкой");
+        while (true) {
+            cout << "Введите радиус: ";
+            Utils::input<float>(radius, "введите число с плавающей точкой");
+            if (!is_real_circle()) {
+                cout << "Радиус должен быть положительным, введите значение заново" << endl;
+            } else {
+                break;
+            }
+        }
         menu();
-
     }
 }
 
